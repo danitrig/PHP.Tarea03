@@ -17,8 +17,14 @@
 <div class="centrar">	
 	<div class="container cuerpo text-left">	
 		<h1><strong>Información</strong></h1>  
-		<p><h2><img class="alineadoTextoImagen" src="images//user.png" width="50px"/>Información de <?php echo "'" . $_SESSION['usuario'] . "'"; ?> </h2></p>
-		<p><a><strong>Alumno:</strong> Daniel Gómez Beltrán </br>
+		<p><h2><img class="alineadoTextoImagen" src="images//user.png" width="50px"/>Información de 
+			<?php
+			if (isset($_COOKIE['mantener'])) {
+				echo"'" . $_COOKIE['mantener'] . "'";
+			} else {
+				echo "'" . $_SESSION['usuario'] . "'";
+			}
+			?> </h2></p>		<p><a><strong>Alumno:</strong> Daniel Gómez Beltrán </br>
 				<strong>Asignatura:</strong> Desarrollo Web Entorno Cliente</br>
 				<strong>Tema 3:</strong> Autenticación de Usuarios y Mantenimiento del Estado en un Sitio Web.</br>
 				<strong>Curso:</strong> 2º DAW Semipresencial</a></p>

@@ -17,6 +17,13 @@
 <div class="centrar">	
 	<div class="container cuerpo text-center">	
 		<h1><strong>PÁGINA DE INICIO</strong></h1>  
-		<p><h2><img class="alineadoTextoImagen" src="images//user.png" width="50px"/>Bienvenido a Mi Sitio <?php echo "'" . $_SESSION['usuario'] . "'" ; ?> </h2></p>
+		<p><h2><img class="alineadoTextoImagen" src="images//user.png" width="50px"/>Bienvenido a Mi Sitio 
+			<?php
+			if (isset($_COOKIE['mantener'])) {
+				echo"'" . $_COOKIE['mantener'] . "'";
+			} else {
+				echo "'" . $_SESSION['usuario'] . "'";
+			}
+			?> </h2></p>
 	</div>
 </div>  

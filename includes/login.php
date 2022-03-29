@@ -23,10 +23,21 @@
 				?>"/>            
 			</label>
 			<br/>
-			<label><input type="checkbox" name="recordar">Recuérdame</label>
+			
+			<label><input type="checkbox" name="recordar" <?php
+				if (isset($_COOKIE['recordar'])) {
+					echo 'checked="true"';
+				}
+				?>"/>Recuérdame</label>
 			<br/>
-			<label><input type="checkbox" name="mantener">Mantener iniciada la sesión de usuario</label>
+			
+			<label><input type="checkbox" name="mantener"  <?php
+				if (isset($_COOKIE['mantener'])) {
+					echo 'checked="true"';
+				}
+				?>"/>Mantener iniciada la sesión de usuario</label>
 			<br/> 
+			
 			<?php
 			if (isset($_GET['error'])) {
 				if ($_GET['error'] == "credenciales") {

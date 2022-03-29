@@ -7,13 +7,15 @@ if ((isset($_POST['usuario']) && isset($_POST['password'])) && (!empty($_POST['u
 	if ($_POST['usuario'] == $usuarioEjemplo && $_POST['password'] == $passwordEjemplo) {
 		//En este caso iniciamos sesión
 		session_start();
-		$_SESSION['logueado'] = 1;
+		$_SESSION['logueado'] = $_POST['usuario'];
 		$_SESSION['usuario'] = $_POST['usuario'];
 
 		if (isset($_POST['recordar']) && ($_POST['recordar'] == "on")) {
 			//Si se selecciona recordar creamos las 2 cookies (usuario y contraseña)
 			setcookie('usuario', $_POST['usuario'], time() + (7 * 24 * 60 * 60)); //Días x Horas x Minutos * Milisegundos
 			setcookie('password', $_POST['password'], time() + (7 * 24 * 60 * 60)); //Días x Horas x Minutos * Milisegundos
+			//Cookie para marcar recordar en caso que lo hayamos hecho anteriormente.
+			setcookie('recordar', $_POST['recordar'], time() + (7 * 24 * 60 * 60));
 		} else {
 			//Si NO se seleccciona las eliminamos.
 			if (isset($_COOKIE['usuario'])) {
@@ -22,7 +24,21 @@ if ((isset($_POST['usuario']) && isset($_POST['password'])) && (!empty($_POST['u
 			if (isset($_COOKIE['password'])) {
 				setcookie('password', "");
 			}
+			if (isset($_COOKIE['recordar'])) {
+				setcookie('recordar', "");
+			}
 		}
+		//Para mantener abierta la sesión añadimos esto:
+		if (isset($_POST['mantener']) && ($_POST['mantener'] == "on")) {
+			// Creamos una cookie para la sesión si marcamos la opción
+			setcookie('mantener', $_POST['usuario'], time() + (7 * 24 * 60 * 60));
+		} else {
+			// Borramos la cookie si no está marcada
+			if (isset($_COOKIE['mantener'])) {
+				setcookie('mantener', "");
+			}
+		}
+
 		//Página a la que redireccionamos si se accede correctamente con nuestras credenciales
 		header("Location: frminicio.php");
 	} else {
